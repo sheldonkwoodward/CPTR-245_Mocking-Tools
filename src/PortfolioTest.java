@@ -1,3 +1,10 @@
+// Sheldon Woodward
+// Cameron Smith
+// Homework 6
+// CPTR 245
+// 11/2/17
+
+import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -7,34 +14,31 @@ import static org.junit.Assert.*;
 
 public class PortfolioTest {
     private Portfolio pf;
-    private ArrayList<Stock> sl;
 
     @Before
     public void setUp() {
         // portfolio
         pf = new Portfolio();
-
-        // mock stock service
-        // TODO: mock stock service
-
-        // sample stocks
-        sl = new ArrayList<>();
-        sl.add(new Stock("1", "GOOG", 12));
-        sl.add(new Stock("2", "AAPL", 4));
     }
 
     @Test
     public void testBuyStock() {
+        // mock stock service
+        StockService mockStockService = EasyMock.createMock(StockService.class);
+        pf.setStockService(mockStockService);
+        EasyMock.expect(mockStockService.purchase("TSLA", 32)).andStubReturn(new Stock("0", "TSLA", 32));
+        EasyMock.replay(mockStockService);
+
+        // buy stock
         pf.buyStock("TSLA", 32);
         ArrayList<Stock> actual = pf.getStock("TSLA");
-        ArrayList<Stock> expected = new ArrayList<>();
-        expected.add(new Stock("0", "TSLA", 32));
+        ArrayList<Stock> expected = new ArrayList<Stock>() {{ add(new Stock("0", "TSLA", 32)); }};
 
-        assertEquals(expected, actual);
-    }
+        // verify mock
+        EasyMock.verify(mockStockService);
 
-    @Test
-    public void testSellStock() {
-
+        // assertions
+        assertEquals(actual.size(), expected.size());
+        assertEquals(actual.get(0), expected.get(0));
     }
 }
