@@ -1,4 +1,5 @@
 // source: https://www.tutorialspoint.com/easymock/easymock_first_application.htm
+// modified by Sheldon and Cameron
 
 public class Stock {
     private String stockId;
