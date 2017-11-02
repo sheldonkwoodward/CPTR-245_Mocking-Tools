@@ -1,8 +1,9 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Portfolio {
     private StockService stockService;
-    private List<Stock> stocks;
+    private ArrayList<Stock> stocks;
 
     public StockService getStockService() {
         return stockService;
@@ -11,10 +12,18 @@ public class Portfolio {
     public void setStockService(StockService stockService) {
         this.stockService = stockService;
     }
-    public List<Stock> getStocks() {
+    public ArrayList<Stock> getStock() {
         return stocks;
     }
-    public void setStocks(List<Stock> stocks) {
+    public ArrayList<Stock> getStock(String ticker) {
+        for(Stock stock : stocks) {
+            if(stock.getTicker().equals(ticker)) {
+                return new ArrayList<Stock>() {{ add(stock); }};
+            }
+        }
+        return new ArrayList<>();
+    }
+    public void setStocks(ArrayList<Stock> stocks) {
         this.stocks = stocks;
     }
     public double getMarketValue(){
@@ -26,7 +35,7 @@ public class Portfolio {
         return marketValue;
     }
 
-    public int buyStock(Stock stock) {
+    public int buyStock(String ticker, int quantity) {
         return  0;
     }
 

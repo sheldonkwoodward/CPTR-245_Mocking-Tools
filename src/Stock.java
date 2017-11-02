@@ -3,9 +3,9 @@ public class Stock {
     private String ticker;
     private int quantity;
 
-    public Stock(String stockId, String name, int quantity){
+    public Stock(String stockId, String ticker, int quantity){
         this.stockId = stockId;
-        this.ticker = name;
+        this.ticker = ticker;
         this.quantity = quantity;
     }
 
